@@ -34,9 +34,10 @@ body {
 }
 
 .hero img {
+  display: block;
   width: 100%;
-  height: 400px;
-  object-fit: cover;
+  height: 300px;
+  object-fit: fill;
 }
 
 .hero-text {
@@ -261,4 +262,205 @@ body {
     flex-direction: column;
     gap: 15px;
   }
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px;
+  background: #e2e2e2;
+}
+
+.header .brand {
+  color: #222;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header .header-search {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  background: white;
+}
+
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header .nav-link,
+.header .post-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #222;
+  font: inherit;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 440px;
+  padding: 60px 20px;
+}
+
+.auth-box {
+  box-sizing: border-box;
+  max-width: 100%;
+  border: 1px solid #85afe5;
+  background: white;
+  color: #222;
+}
+
+.login-box {
+  width: 430px;
+  padding: 24px 32px 50px;
+}
+
+.signup-link-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.signup-link {
+  padding: 5px 12px;
+  border: 1px solid #85afe5;
+  color: #3478d4;
+  text-decoration: none;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 290px;
+  margin: auto;
+}
+
+.login-form label {
+  margin-bottom: 8px;
+}
+
+.auth-box input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  color: #222;
+  font: inherit;
+}
+
+.login-form input {
+  margin-bottom: 20px;
+}
+
+.auth-button {
+  padding: 10px;
+  border: none;
+  background: #377cf6;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.google-button {
+  border: 1px solid #377cf6;
+  background: white;
+  color: #245fc2;
+}
+
+.login-form .google-button {
+  margin-top: 14px;
+}
+
+.signup-box {
+  width: 580px;
+  padding: 24px 28px 36px;
+}
+
+.signup-box h2 {
+  margin-bottom: 30px;
+  color: #3478d4;
+  text-align: center;
+  font-size: 20px;
+}
+
+.signup-form {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px 16px;
+  align-items: center;
+}
+
+.signup-form .auth-button {
+  grid-column: 2;
+}
+
+.form-error {
+  color: #b42318;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.signup-form .form-error {
+  grid-column: 1 / -1;
+}
+
+.form-error:empty {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header .header-search {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .signup-form {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .signup-form .auth-button {
+    grid-column: 1;
+  }
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  color: #222;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #0ea5e9;
 }

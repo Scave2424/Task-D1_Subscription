@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'
 function Footer() {
   return (
     <footer className="footer">
@@ -31,9 +33,17 @@ function Footer() {
         <div>
           <h3>Stay connected</h3>
           <div className="social-icons">
-            <span>f</span>
-            <span>𝕏</span>
-            <span>in</span>
+            <Link to="https://www.facebook.com/" aria-label="Facebook">
+              <FaFacebook />
+            </Link>
+
+            <Link to="https://twitter.com/" aria-label="Twitter">
+              <FaTwitter />
+            </Link>
+
+            <Link to="https://www.instagram.com/" aria-label="Instagram">
+              <FaInstagram />
+            </Link>
           </div>
         </div>
       </div>

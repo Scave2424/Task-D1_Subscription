@@ -1,12 +1,28 @@
+import { Link } from 'react-router-dom'
+
+// Displays the shared navigation bar.
 function Header() {
   return (
     <header className="header">
-      <h1>DEV@Deakin</h1>
+      <Link to="/" className="brand">
+        DEV@Deakin
+      </Link>
+
+      <input
+        className="header-search"
+        type="search"
+        placeholder="🔍 Search..."
+        aria-label="Search"
+      />
 
       <nav>
-        <a href="#home" className="nav-link">Home</a>
-        <a href="#articles" className="nav-link">Articles</a>
-        <a href="#tutorials" className="nav-link">Tutorials</a>
+        <button type="button" className="post-button">
+          Post
+        </button>
+
+        <Link to="/login" className="nav-link">
+          Login
+        </Link>
       </nav>
     </header>
   )
