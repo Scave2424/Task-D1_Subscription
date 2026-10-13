@@ -16,9 +16,9 @@ function Header() {
       />
 
       <nav>
-        <button type="button" className="post-button">
+        <Link to="/post" className="post-button">
           Post
-        </button>
+        </Link>
 
         <Link to="/login" className="nav-link">
           Login
