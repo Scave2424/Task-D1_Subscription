@@ -1,6 +1,32 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'
+
 function Footer() {
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+
+  const handleSubscribe = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      })
+
+      const result = await response.json()
+      setMessage(result.message)
+
+      if (response.ok) {
+        setEmail('')
+      }
+    } catch (error) {
+      setMessage('Unable to subscribe. Please try again.')
+    }
+  }
+
   return (
     <footer className="footer">
       <div className="subscribe">
@@ -9,9 +35,13 @@ function Footer() {
         <input
           type="email"
           placeholder="Enter your email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
 
-        <button>Subscribe</button>
+        <button onClick={handleSubscribe}>Subscribe</button>
+
+        {message && <p>{message}</p>}
       </div>
 
       <div className="footer-content">
