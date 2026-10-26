@@ -597,3 +597,301 @@ body {
     width: 100%;
   }
 }
+
+
+/* Pricing page */
+.pricing-page {
+  box-sizing: border-box;
+  min-height: 420px;
+  padding: 48px 24px 60px;
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+.pricing-page h1,
+.pricing-page h2 {
+  margin: 0 0 8px;
+  color: #202124;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.pricing-page>p {
+  margin: 0 0 36px;
+  color: #5f6368;
+  font-size: 16px;
+}
+
+.pricing-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  box-sizing: border-box;
+  width: 340px;
+  padding: 26px 24px;
+  background: #ffffff;
+  border: 1px solid #e1e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pricing-card h2,
+.pricing-card h3 {
+  margin: 0;
+  color: #202124;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.pricing-card .pricing-price,
+.pricing-card .price {
+  margin: 12px 0 20px;
+  color: #5f6368;
+  font-size: 16px;
+}
+
+.pricing-card p {
+  margin: 10px 0;
+  color: #5f6368;
+  line-height: 1.6;
+}
+
+.pricing-card button {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 22px;
+  padding: 12px 16px;
+  border: 1px solid #3878f6;
+  border-radius: 6px;
+  background-color: #3878f6;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pricing-card button:hover {
+  background-color: #245fc9;
+}
+
+.pricing-card button:disabled {
+  background-color: #e8f0fe;
+  border-color: #e8f0fe;
+  color: #245fc9;
+  cursor: default;
+}
+
+.pricing-heading {
+  margin-bottom: 30px;
+}
+
+.pricing-heading h1,
+.pricing-heading h2 {
+  margin: 0 0 8px;
+  color: #202124;
+  font-size: 32px;
+}
+
+.pricing-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pricing-card-heading h2,
+.pricing-card-heading h3 {
+  margin: 0;
+}
+
+.plan-badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #e6f4ea;
+  color: #137333;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.selected-plan {
+  border: 2px solid #3878f6;
+  box-shadow: 0 4px 14px rgba(56, 120, 246, 0.12);
+}
+
+.current-plan {
+  margin-top: 20px !important;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f0f5ff;
+  color: #245fc9 !important;
+  font-size: 14px;
+}
+
+/* Payment modal overlay */
+.payment-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+/* Payment form card */
+.payment-modal {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 460px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 32px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.payment-modal h2,
+.payment-modal h3 {
+  margin: 0 0 24px;
+  color: #202124;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.payment-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+}
+
+.payment-modal label {
+  display: block;
+  margin-top: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.payment-modal input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #202124;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.payment-modal input:focus {
+  border-color: #3878f6;
+  box-shadow: 0 0 0 3px rgba(56, 120, 246, 0.15);
+}
+
+.payment-modal input::placeholder {
+  color: #9ca3af;
+}
+
+.payment-modal .form-error {
+  margin: 8px 0;
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.payment-modal button {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 11px 16px;
+  border: 1px solid #3878f6;
+  border-radius: 7px;
+  background: #3878f6;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.payment-modal button:hover:not(:disabled) {
+  background: #245fc9;
+}
+
+.payment-modal button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.payment-modal .payment-cancel {
+  margin-top: 0;
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #245fc9;
+}
+
+.payment-modal .payment-cancel:hover:not(:disabled) {
+  background: #f0f5ff;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) {
+  .pricing-page {
+    padding: 32px 16px 44px;
+  }
+
+  .pricing-page h1,
+  .pricing-page h2 {
+    font-size: 26px;
+  }
+
+  .pricing-card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-overlay {
+    padding: 12px;
+  }
+
+  .payment-modal {
+    max-height: calc(100vh - 24px);
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .payment-modal h2,
+  .payment-modal h3 {
+    font-size: 22px;
+  }
+}

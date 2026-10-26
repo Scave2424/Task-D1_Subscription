@@ -3,7 +3,7 @@ import {
     getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword
 } from 'firebase/auth'
 import {
-    getFirestore,doc,getDoc,setDoc
+    getFirestore, doc, getDoc, setDoc, updateDoc
 } from 'firebase/firestore'
 
 // Reads your existing Firebase settings from .env.
@@ -43,18 +43,38 @@ export async function loginwithemailandpassword(email, password) {
     return await signInWithEmailAndPassword(auth, email, password)
 }
 
-// Saves a new user's profile without replacing an existing record.
+// Saves a user's profile and fills in any missing profile fields.
 export async function createUserDoc(userAuth, otherinfo) {
     const userDocRef = doc(db, 'users', userAuth.uid)
     const userSnapshot = await getDoc(userDocRef)
 
-    if (!userSnapshot.exists()) {
-        const { displayName, email } = userAuth
+    const { displayName, email } = userAuth
 
+    if (!userSnapshot.exists()) {
         await setDoc(userDocRef, {
             displayName,
             email,
+            plan: 'Free',
             ...otherinfo
         })
+    } else {
+        const userDetails = userSnapshot.data()
+        const updates = {}
+
+        if (!userDetails.displayName && displayName) {
+            updates.displayName = displayName
+        }
+
+        if (!userDetails.email && email) {
+            updates.email = email
+        }
+
+        if (!userDetails.plan) {
+            updates.plan = 'Free'
+        }
+
+        if (Object.keys(updates).length > 0) {
+            await updateDoc(userDocRef, updates)
+        }
     }
 }

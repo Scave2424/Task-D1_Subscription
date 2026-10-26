@@ -1,15 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { doc, getDoc } from 'firebase/firestore'
-import bcrypt from 'bcryptjs'
-import {
-    db,
-    loginwithemailandpassword,
-    signinwithGoogle,
-    createUserDoc
-} from '../firebase'
+import { signinwithGoogle } from '../firebase'
 
-// Displays both login options and opens home after a successful check.
+// Displays both login options and creates a session after successful login.
 function Login() {
     const [contact, setcontact] = useState({
         email: '',
@@ -31,73 +24,66 @@ function Login() {
         })
     }
 
-    // Checks the Firebase account and the saved Firestore details.
+    // Checks the credentials through the backend and saves the JWT session.
     async function loginuser(event) {
         event.preventDefault()
         setError('')
         setLoading(true)
 
-        const email = contact.email.trim().toLowerCase()
-        const password = contact.password
-
         try {
-            const { user } = await loginwithemailandpassword(
-                email,
-                password
-            )
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: contact.email.trim().toLowerCase(),
+                    password: contact.password
+                })
+            })
 
-            const userDocRef = doc(db, 'users', user.uid)
-            const userSnapshot = await getDoc(userDocRef)
+            const result = await response.json()
 
-            if (!userSnapshot.exists()) {
-                setError('Your Firestore profile could not be found.')
-            } else {
-                const userDetails = userSnapshot.data()
-
-                // Google-only profiles do not have a website password hash.
-                if (!userDetails.passwordHash) {
-                    setError('Please use Continue with Google for this account.')
-                } else {
-                    const passwordMatches = await bcrypt.compare(
-                        password,
-                        userDetails.passwordHash
-                    )
-
-                    // Opens home only when the saved email and password match.
-                    if (
-                        userDetails.email === email &&
-                        passwordMatches
-                    ) {
-                        navigate('/')
-                    } else {
-                        setError(
-                            'Incorrect email or password. Please try again or sign up for a free account.'
-                        )
-                    }
-                }
+            if (!response.ok) {
+                throw new Error(result.message || 'Unable to log in.')
             }
+
+            localStorage.setItem('token', result.token)
+            localStorage.setItem('user', JSON.stringify(result.user))
+
+            navigate('/')
         } catch (error) {
-            if (error.code === 'permission-denied') {
-                setError('Could not read your profile. Check the Firestore rules.')
-            } else {
-                setError(
-                    'Unable to log in. Check your details, try again, or sign up for a free account. Google users should use Continue with Google.'
-                )
-            }
+            setError(error.message || 'Unable to log in. Please try again.')
         }
 
         setLoading(false)
     }
 
-    // Signs in through Google and creates a profile if this is the first visit.
+    // Verifies Google sign-in through the backend and saves the JWT session.
     async function googleLogin() {
         setError('')
         setLoading(true)
 
         try {
             const { user } = await signinwithGoogle()
+            const idToken = await user.getIdToken()
 
-            await createUserDoc(user, {})
+            const response = await fetch('http://localhost:3000/google-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idToken })
+            })
+
+            const result = await response.json()
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Google sign-in failed.')
+            }
+
+            localStorage.setItem('token', result.token)
+            localStorage.setItem('user', JSON.stringify(result.user))
 
             navigate('/')
         } catch (error) {

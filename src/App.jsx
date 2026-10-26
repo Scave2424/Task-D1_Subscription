@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Post from './pages/Post'
+import Pricing from './pages/Pricing'
 
 // Connects the website pages to their routes.
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="post" element={<Post />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="pricing" element={<Pricing />} />
         </Route>
       </Routes>
     </BrowserRouter>
