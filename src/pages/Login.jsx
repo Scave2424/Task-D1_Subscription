@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { signinwithGoogle } from '../firebase'
 
 // Displays both login options and creates a session after successful login.
@@ -13,6 +13,10 @@ function Login() {
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
+    const location = useLocation()
+
+    // Displays a message when the user is redirected from a protected page.
+    const message = location.state?.message
 
     // Updates the selected field without removing the other value.
     function handleChange(event) {
@@ -101,6 +105,12 @@ function Login() {
                         Sign up
                     </Link>
                 </div>
+
+                {message && (
+                    <p className="form-error" role="status">
+                        {message}
+                    </p>
+                )}
 
                 <form className="login-form" onSubmit={loginuser}>
                     <label htmlFor="login-email">Your email</label>
